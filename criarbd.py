@@ -2,7 +2,6 @@
 import sqlite3 as lite
 
 # criando conexao
-
 con = lite.connect('dados.db')
 
 #criando tabela
