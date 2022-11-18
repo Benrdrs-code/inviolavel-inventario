@@ -1,39 +1,51 @@
 #importando sqlite
 import sqlite3 as lite
 
-# criando conexao
+# -=-=-=-=-= criando conexao -=-=-=-=-= 
 con = lite.connect('dados.db')
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
-dados = ['sofa', 'sala de estar', 'sofa que comprei em 1997', 'Marca X', '27/08/2022', '500', 'xxxxxx', 'c:imagens']
-# inserir dados
+# -------------- CRUD {
+def inserir_form(i):
+    with con:
+        cur = con.cursor()
+        query = "INSERT INTO inventario(nome, local, descricao, marca, data_da_compra, valor_da_compra, serie, imagem) VALUES(?,?,?,?,?,?,?,?)"
+        cur.execute(query,i)
 
-# INSERIR DADOS  
-with con:
-    cur = con.cursor()
-    query = "INSERT INTO inventario(nome, local, descricao, marca, data_da_compra, valor_da_compra, serie, imagem) VALUES(?,?,?,?,?,?,?,?)"
-    cur.execute(query,dados)
+def atualizar_form(i):
+    with con:
+        cur = con.cursor()
+        query = "UPDATE inventario SET nome=?, local=?, descricao=?, marca=?, data_da_compra=?, valor_da_compra=?, serie=?, imagem=? WHERE id=?"
+        cur.execute(query,i)
 
-atualizar_dados = ['sofa', 'Garagem', 'sofa que comprei em 1997', 'Marca X', '27/08/2022', '500', 'xxxxxx', 'c:imagens', 1]
-# Atualizar DADOS  
-with con:
-    cur = con.cursor()
-    query = "UPDATE inventario SET nome=?, local=?, descricao=?, marca=?, data_da_compra=?, valor_da_compra=?, serie=?, imagem=? WHERE id=?"
-    cur.execute(query,atualizar_dados)
+def deletar_form(i):    
+    with con:
+        cur = con.cursor()
+        query = "DELETE FROM inventario WHERE id=?"
+        cur.execute(query,i)
 
+def ver_form():
+    ver_dados = []   
+    with con:
+        cur = con.cursor()
+        query = "SELECT * FROM inventario"
+        cur.execute(query)
 
+        rows = cur.fetchall()
+        for row in rows:
+            ver_dados.append(row)
+    return ver_dados
 
-ver_dados = []
+def ver_item(id):
+    ver_dados_invidual = []
+    id = 0
+    with con:
+        cur = con.cursor()
+        query = "SELECT * FROM inventario WHERE i=?"
+        cur.execute(query,id)
 
-# VER DADOS    
-with con:
-    cur = con.cursor()
-    query = "SELECT * FROM inventario"
-    cur.execute(query)
-
-    rows = cur.fetchall()
-    for row in rows:
-        ver_dados.append(row)
-
-print(ver_dados)
-    
+        rows = cur.fetchall()
+        for row in rows:
+            ver_dados_invidual.append(row)
+#  } CRUD --------------
