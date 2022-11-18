@@ -14,6 +14,15 @@ with con:
     query = "INSERT INTO inventario(nome, local, descricao, marca, data_da_compra, valor_da_compra, serie, imagem) VALUES(?,?,?,?,?,?,?,?)"
     cur.execute(query,dados)
 
+atualizar_dados = ['sofa', 'Garagem', 'sofa que comprei em 1997', 'Marca X', '27/08/2022', '500', 'xxxxxx', 'c:imagens', 1]
+# Atualizar DADOS  
+with con:
+    cur = con.cursor()
+    query = "UPDATE inventario SET nome=?, local=?, descricao=?, marca=?, data_da_compra=?, valor_da_compra=?, serie=?, imagem=? WHERE id=?"
+    cur.execute(query,atualizar_dados)
+
+
+
 ver_dados = []
 
 # VER DADOS    
