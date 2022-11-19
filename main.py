@@ -96,6 +96,44 @@ l_serial.place(x=10, y=190)
 e_serial = Entry(frameMid, width=30, justify='left', relief=SOLID)
 e_serial.place(x=130, y=191)
 
+#criando botoes---------------------
+
+
+#Carregar
+l_carregar = Label(frameMid, text='Imagem Do Item', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co0, fg=co1)
+l_carregar.place(x=10, y=220)
+b_carregar = Button(frameMid, width=29, text='Carregar'.upper(), compound=CENTER, anchor=CENTER, overrelief=RIDGE, font=('Ivy 8'), bg=co0, fg=co1)
+b_carregar.place(x=130, y=220)
+
+#Inserir
+#abrir imagem
+img_add = Image.open('icon/add.png')
+img_add = img_add.resize((20,20))
+img_add = ImageTk.PhotoImage(img_add)
+
+b_inserir = Button(frameMid, image=img_add, width=90, text='  Adicionar'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co0, fg=co1)
+b_inserir.place(x=330, y=10)
+
+#Atualizar
+#abrir imagem
+img_up = Image.open('icon/up.png')
+img_up = img_up.resize((20,20))
+img_up = ImageTk.PhotoImage(img_up)
+
+b_atulizar = Button(frameMid, image=img_up, width=90, text='  Atualizar'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co0, fg=co1)
+b_atulizar.place(x=330, y=40)
+
+
+#Deletar
+#abrir imagem
+img_rm = Image.open('icon/rm.png')
+img_rm = img_rm.resize((20,20))
+img_rm = ImageTk.PhotoImage(img_rm)
+
+b_deletar = Button(frameMid, image=img_rm, width=90, text='  Deletar'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co0, fg=co1)
+b_deletar.place(x=330, y=70)
+
+
 
 janela.mainloop()
 
