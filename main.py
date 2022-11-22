@@ -133,6 +133,81 @@ img_rm = ImageTk.PhotoImage(img_rm)
 b_deletar = Button(frameMid, image=img_rm, width=90, text='  Deletar'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co0, fg=co1)
 b_deletar.place(x=330, y=70)
 
+#ver imagem
+img_ver = Image.open('icon/ver.png')
+img_ver = img_ver.resize((20,20))
+img_ver = ImageTk.PhotoImage(img_ver)
+
+b_ver = Button(frameMid, image=img_ver, width=90, text='  Ver Item'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co0, fg=co1)
+b_ver.place(x=330, y=218)
+
+# labels quantidade total e valores
+
+#total
+l_total = Label(frameMid, text='', width=14, height=3, anchor=CENTER, font=('Ivy 20 bold'), bg=co0_1, fg=co1)
+l_total.place(x=450, y=17)
+
+l_total_ = Label(frameMid, text=' Valor Total De Todos os Itens  :', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co0_1, fg=co1)
+l_total_.place(x=470, y=20)
+
+#quantidade
+l_qtd = Label(frameMid, text='', width=14, height=3, anchor=CENTER, font=('Ivy 20 bold'), bg=co0_1, fg=co1)
+l_qtd.place(x=450, y=125)
+l_qtd = Label(frameMid, text='             Quantidade  :', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co0_1, fg=co1)
+l_qtd.place(x=450, y=127)
+
+
+# tabela ---------------------------------------------------------
+
+# creating a treeview with dual scrollbars
+tabela_head = ['#Item','Nome',  'Sala/Área','Descrição', 'Marca/Modelo', 'Data da compra','Valor da compra', 'Número de série']
+
+lista_itens = []
+
+global tree
+
+tree = ttk.Treeview(frameBot,selectmode="extended",columns=tabela_head, show="headings")
+
+# vertical scrollbar
+vsb = ttk.Scrollbar(frameBot, orient="vertical", command=tree.yview)
+
+# horizontal scrollbar
+hsb = ttk.Scrollbar(frameBot, orient="horizontal", command=tree.xview)
+
+tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+tree.grid(column=0, row=0, sticky='nsew')
+vsb.grid(column=1, row=0, sticky='ns')
+hsb.grid(column=0, row=1, sticky='ew')
+frameBot.grid_rowconfigure(0, weight=12)
+
+hd=["center","center","center","center","center","center","center", 'center']
+h=[150,150,150,150,150,150,150,150]
+n=0
+
+for col in tabela_head:
+    tree.heading(col, text=col.title(), anchor=CENTER)
+    # adjust the column's width to the header string
+    tree.column(col, width=h[n],anchor=hd[n])
+    n+=1
+
+
+# inserindo os itens dentro da tabela
+for item in lista_itens:
+    tree.insert('', 'end', values=item)
+
+
+
+quantidade = []
+
+for iten in lista_itens:
+    quantidade.append(iten[6])
+
+Total_valor = sum(quantidade)
+Total_itens = len(quantidade)
+
+l_total['text'] = 'R$ {:,.2f}'.format(Total_valor)
+l_qtd['text'] = Total_itens
+
 
 
 janela.mainloop()
